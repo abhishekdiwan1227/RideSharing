@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "RideSharing", "RideSharing\RideSharing.jsproj", "{FA7DAF1B-1A56-4623-96B0-9A52630E3B4A}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "RideSharing.Mobile", "RideSharing\RideSharing.Mobile.jsproj", "{FA7DAF1B-1A56-4623-96B0-9A52630E3B4A}"
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "RideSharing.BackEnd", "RideSharing.BackEnd\RideSharing.BackEnd.njsproj", "{60C36E3A-2B22-4AC8-A16E-5F14711B7EBC}"
 EndProject
