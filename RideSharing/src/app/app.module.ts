@@ -1,30 +1,35 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
+import { NgModule } from '@angular/core';
+import { IonicApp, IonicModule } from 'ionic-angular';
+import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from '../pages/profile/profile';
+import { RegisterPage } from '../pages/register/register';
+import { RidePage } from '../pages/ride/ride';
 import { TabsPage } from '../pages/tabs/tabs';
+import { RegistrationService } from '../services/registrationService';
+import { MyApp } from './app.component';
+import { HttpClientWrapper } from '../wrapper/httpClientWrapper';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage
-  ],
-  imports: [
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage
-  ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+    declarations: [
+        MyApp,
+        RidePage,
+        ProfilePage,
+        LoginPage,
+        RegisterPage,
+        TabsPage,
+    ],
+    imports: [
+        IonicModule.forRoot(MyApp),
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        RidePage,
+        ProfilePage,
+        LoginPage,
+        RegisterPage,
+        TabsPage
+    ],
+    providers: [HttpClientWrapper, RegistrationService]
 })
-export class AppModule {}
+export class AppModule { }
