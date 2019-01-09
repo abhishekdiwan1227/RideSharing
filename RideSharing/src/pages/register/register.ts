@@ -1,7 +1,8 @@
 ﻿import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { UserService } from '../../services/userService';
+import { LoginPage } from '../login/login';
 import { Register } from './register.models';
-import { RegistrationService } from '../../services/registrationService';
 
 /*
   Generated class for the register page.
@@ -12,18 +13,34 @@ import { RegistrationService } from '../../services/registrationService';
 @Component({
     selector: 'page-register',
     templateUrl: 'register.html',
-    providers: [RegistrationService]
+    providers: [UserService] 
 })
 export class RegisterPage {
 
     registerParams: Register;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public registrationService: RegistrationService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public userService: UserService) {
         this.registerParams = new Register();
     }
 
     registerUser() {
-        this.registrationService.registerUser();
+        this.userService.registerUser(this.registerParams).subscribe(res => {
+            if (res.status == 200) {
+                this.toastCtrl.create({
+                    message: "User Created",
+                    duration: 3000,
+                    position: 'top'
+                }).present();
+                this.navCtrl.push(LoginPage);
+            }
+            else {
+                this.toastCtrl.create({
+                    message: "Failed to Register New User",
+                    duration: 3000,
+                    position: 'top'
+                }).present();
+            }
+        });
     }
 
 }

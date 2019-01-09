@@ -2,6 +2,7 @@
 import { NavController, NavParams } from 'ionic-angular';
 import { RegisterPage } from '../register/register';
 import { Login } from './login.models';
+import { UserService } from '../../services/userService';
 
 /*
   Generated class for the login page.
@@ -17,12 +18,12 @@ export class LoginPage {
 
     loginParams: Login;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService) {
         this.loginParams = new Login;
     }
 
     login() {
-        console.log(this.loginParams.Username + " " + this.loginParams.Password)
+        this.userService.authenticateUser(this.loginParams);
     }
 
     register() {

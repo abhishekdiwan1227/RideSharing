@@ -5,9 +5,9 @@ import { ProfilePage } from '../pages/profile/profile';
 import { RegisterPage } from '../pages/register/register';
 import { RidePage } from '../pages/ride/ride';
 import { TabsPage } from '../pages/tabs/tabs';
-import { RegistrationService } from '../services/registrationService';
-import { MyApp } from './app.component';
 import { HttpClientWrapper } from '../wrapper/httpClientWrapper';
+import { MyApp } from './app.component';
+import { UserService } from '../services/userService';
 
 @NgModule({
     declarations: [
@@ -30,6 +30,6 @@ import { HttpClientWrapper } from '../wrapper/httpClientWrapper';
         RegisterPage,
         TabsPage
     ],
-    providers: [HttpClientWrapper, RegistrationService]
+    providers: [HttpClientWrapper, UserService]
 })
 export class AppModule { }
