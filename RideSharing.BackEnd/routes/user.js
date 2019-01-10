@@ -9,12 +9,19 @@ var User = require('../models/userModel');
 var db = require('../config/database');
 var mongoose = require('mongoose');
 router.post('/authenticateUser', function (req, res) {
-    User.findOne({ username: req.body.Username, password: req.body.Password })
+    User.findOne({ username: req.body.Username })
+        .exec()
         .then(function (result) {
-        console.log(result);
+        if (result) {
+            res.status(200).json(result);
+        }
+        else {
+            res.json(result);
+        }
     })
         .catch(function (err) {
         console.log(err);
+        res.status(500).json("Failed");
     });
 });
 router.post('/registerUser', function (req, res) {
@@ -29,9 +36,11 @@ router.post('/registerUser', function (req, res) {
     user.save()
         .then(function (result) {
         res.status(200);
+        res.json("Successful");
     })
         .catch(function (err) {
         console.log(err);
+        res.status(500).json("Failed");
     });
 });
 exports.default = router;

@@ -17,7 +17,7 @@
        under the License.
  */
 
-package io.cordova.myappe3ee0d;
+package io.ionic.starter;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

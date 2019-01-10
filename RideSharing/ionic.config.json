@@ -1,6 +1,9 @@
 {
   "name": "io.cordova.myappe3ee0d",
-  "app_id": "",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
   "v2": true,
   "typescript": true
 }

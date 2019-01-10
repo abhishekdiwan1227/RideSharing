@@ -4,6 +4,8 @@ import { HttpClientWrapper } from "../wrapper/httpClientWrapper";
 @Injectable()
 export class UserService {
 
+    currentUser: string;
+
     constructor(private httpClientWrapper: HttpClientWrapper) { }
 
     public registerUser(registrationModel) {
