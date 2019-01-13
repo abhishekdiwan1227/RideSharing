@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Driver Dashboard</ion-title>
+    </ion-navbar>
+    <ion-buttons>
+        <ion-item>
+            <ion-label>Go Online</ion-label>
+            <ion-toggle [(ngModel)]="isActive" (ionChange)="switchDriverActive()"></ion-toggle>
+        </ion-item>
+    </ion-buttons>
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="isActive">
+        <h4>Incoming Requests</h4>
+    </div>
+</ion-content>

@@ -4,4 +4,8 @@
     Password: string;
     Email: string;
     Phone: string;
+    IsDriver: boolean;
+    RegistrationNumber: string;
+    EngineNumber: string;
+    ChassisNumber: string;
 }

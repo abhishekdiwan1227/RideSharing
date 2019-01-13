@@ -1,9 +1,3 @@
-<!--
-  Generated template for the NewPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -30,6 +24,21 @@
         <ion-item>
             <ion-input type="email" [(ngModel)]="registerParams.Email" name="email" placeholder="Email"></ion-input>
         </ion-item>
+        <ion-item>
+            <ion-label>Register as Driver</ion-label>
+            <ion-toggle (ionChange)="registerParams.IsDriver = !registerParams.IsDriver"></ion-toggle>
+        </ion-item>
+        <div *ngIf="registerParams.IsDriver">
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="registerParams.RegistrationNumber" name="registrationNumber" placeholder="Registration Number"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="registerParams.EngineNumber" name="engineNumber" placeholder="Engine Number"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="registerParams.ChassisNumber" name="chassisNumber" placeholder="Chassis Number"></ion-input>
+            </ion-item>
+        </div>
         <button ion-button type="submit" block>Register</button>
     </form>
 </ion-content>

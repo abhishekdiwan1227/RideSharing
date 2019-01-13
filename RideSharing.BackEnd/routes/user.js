@@ -25,18 +25,34 @@ router.post('/authenticateUser', function (req, res) {
     });
 });
 router.post('/registerUser', function (req, res) {
-    var user = new User({
-        _id: mongoose.Types.ObjectId(),
-        name: req.body.Name,
-        username: req.body.Username,
-        password: req.body.Password,
-        phone: req.body.Phone,
-        email: req.body.Email
-    });
+    if (!req.body.IsDriver) {
+        var user = new User({
+            _id: mongoose.Types.ObjectId(),
+            name: req.body.Name,
+            username: req.body.Username,
+            password: req.body.Password,
+            phone: req.body.Phone,
+            email: req.body.Email
+        });
+    }
+    else {
+        var user = new User({
+            _id: mongoose.Types.ObjectId(),
+            name: req.body.Name,
+            username: req.body.Username,
+            password: req.body.Password,
+            phone: req.body.Phone,
+            email: req.body.Email,
+            isDriver: req.body.IsDriver,
+            registrataionNumber: req.body.RegistrationNumber,
+            engineNumber: req.body.EngineNumber,
+            chassisNumber: req.body.ChassisNumber
+        });
+    }
     user.save()
         .then(function (result) {
         res.status(200);
-        res.json("Successful");
+        res.json(result);
     })
         .catch(function (err) {
         console.log(err);

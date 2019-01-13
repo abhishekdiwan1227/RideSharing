@@ -28,6 +28,18 @@ var UserSchema = new Schema({
         type: String,
         required: true,
     },
+    isDriver: {
+        type: Boolean,
+    },
+    registrataionNumber: {
+        type: String,
+    },
+    engineNumber: {
+        type: String,
+    },
+    chassisNumber: {
+        type: String,
+    },
 });
 module.exports = mongoose.model('user', UserSchema);
 //# sourceMappingURL=userModel.js.map

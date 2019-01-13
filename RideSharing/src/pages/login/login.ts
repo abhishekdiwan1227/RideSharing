@@ -4,6 +4,10 @@ import { UserService } from '../../services/userService';
 import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
 import { Login } from './login.models';
+import { RidePage } from '../ride/ride';
+import { DriverPage } from '../driver/driver';
+import { RiderService } from '../../services/riderService';
+import { ActiveDriver } from '../driver/driver.models';
 
 /*
   Generated class for the login page.
@@ -19,7 +23,7 @@ export class LoginPage {
 
     loginParams: Login;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService, public toastCtrl: ToastController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService, public toastCtrl: ToastController, private riderService: RiderService) {
         this.loginParams = new Login;
     }
 
@@ -39,7 +43,13 @@ export class LoginPage {
                     duration: 3000,
                     position: 'top'
                 }).present();
-                this.navCtrl.push(TabsPage);
+                if (res.json().isDriver) {
+                    this.navCtrl.push(DriverPage, {
+                        driverUsername: res.json().username
+                    });
+                } else {
+                    this.navCtrl.push(TabsPage);
+                }
             }
         });
     }

@@ -1,7 +1,8 @@
 ﻿import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../services/userService';
+import { RiderService } from '../../services/riderService';
 
 declare var google;
 
@@ -15,7 +16,7 @@ export class RidePage {
     @ViewChild('map') mapElement: ElementRef;
     map: any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation, private userService: UserService) { }
+    constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation, private userService: UserService, private riderService: RiderService) { }
 
     ionViewDidLoad() {
         this.loadMap();
@@ -38,6 +39,19 @@ export class RidePage {
                 position: this.map.getCenter()
             });
             myPositionMarker.bindTo('position', this.map, 'center');
+            this.getDrivers();
+        });
+    }
+
+    getDrivers() {
+        this.riderService.getActiveDrivers().subscribe(res => {
+            res.json().forEach((driver) => {
+                var marker = new google.maps.Marker({
+                    map: this.map,
+                    animation: google.maps.Animation.DROP,
+                    position: new google.maps.LatLng(driver.Coordinates.latitude, driver.Coordinates.longitude)
+                });
+            })
         })
-    }   
+    }
 }
