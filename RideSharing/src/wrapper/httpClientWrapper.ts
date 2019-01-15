@@ -20,4 +20,8 @@ export class HttpClientWrapper {
     public post(url, body) {
         return this.http.post(url, body, this.requestOptions);
     }
+
+    public put(url, body) {
+        return this.http.put(url, body, this.requestOptions);
+    }
 }

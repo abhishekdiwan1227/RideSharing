@@ -3,6 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../services/userService';
 import { RiderService } from '../../services/riderService';
+import { GoogleMapsServiceWrapper } from '../../wrapper/googleMapsServiceWrapper';
 
 declare var google;
 
@@ -12,11 +13,17 @@ declare var google;
 })
 export class RidePage {
 
+    origin: string;
     destination: string;
+    myPositionMarker: any;
     @ViewChild('map') mapElement: ElementRef;
     map: any;
+    riderUsername: string;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation, private userService: UserService, private riderService: RiderService) { }
+    constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation, private userService: UserService, private riderService: RiderService,
+        public googleMapsServiceWrapper: GoogleMapsServiceWrapper) {
+        this.riderUsername = navParams.get("riderUsername");
+    }
 
     ionViewDidLoad() {
         this.loadMap();
@@ -32,13 +39,14 @@ export class RidePage {
                 mapTypeControl: false
             };
             this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-            let myPositionMarker = new google.maps.Marker({
+            this.myPositionMarker = new google.maps.Marker({
                 map: this.map,
                 animation: google.maps.Animation.DROP,
                 draggable: true,
                 position: this.map.getCenter()
             });
-            myPositionMarker.bindTo('position', this.map, 'center');
+            this.myPositionMarker.bindTo('position', this.map, 'center');
+            this.origin = this.myPositionMarker.position.lat() + "," + this.myPositionMarker.position.lng();
             this.getDrivers();
         });
     }
@@ -53,5 +61,34 @@ export class RidePage {
                 });
             })
         })
+    }
+
+    gotoDestination() {
+        var result = this.googleMapsServiceWrapper.GetDestinationDirectionResult(this.origin, this.destination).subscribe(res => {
+            var routes = res.json().routes;
+            if (routes.length > 0) {
+                var destinationMarker = new google.maps.Marker({
+                    map: this.map,
+                    animation: google.maps.Animation.DROP,
+                    position: new google.maps.LatLng(routes[0].legs[0].end_location)
+                });
+                var originMarker = new google.maps.Marker({
+                    map: this.map,
+                    animation: google.maps.Animation.DROP,
+                    position: this.myPositionMarker.getPosition()
+                });
+            }
+
+            this.myPositionMarker.setMap(null);
+
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend(destinationMarker.getPosition());
+            bounds.extend(this.myPositionMarker.getPosition());
+            this.map.fitBounds(bounds);
+
+            this.riderService.createIncomingRideRequest({ RiderName: this.riderUsername, Destination: this.destination }).subscribe(res => {
+                console.log(res);
+            });
+        });
     }
 }

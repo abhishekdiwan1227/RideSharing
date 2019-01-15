@@ -15,6 +15,7 @@
 <ion-content padding>
     <ion-item>
         <ion-input type="text" [(ngModel)]="destination" name="destination" placeholder="Where to?"></ion-input>
+        <button ion-button item-right (click)="gotoDestination()">Go!</button>
     </ion-item>
     <div #map id="map"></div>
 </ion-content>

@@ -7,10 +7,11 @@ import { ProfilePage } from '../pages/profile/profile';
 import { RegisterPage } from '../pages/register/register';
 import { RidePage } from '../pages/ride/ride';
 import { TabsPage } from '../pages/tabs/tabs';
+import { RiderService } from '../services/riderService';
 import { UserService } from '../services/userService';
+import { GoogleMapsServiceWrapper } from '../wrapper/googleMapsServiceWrapper';
 import { HttpClientWrapper } from '../wrapper/httpClientWrapper';
 import { MyApp } from './app.component';
-import { RiderService } from '../services/riderService';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,6 @@ import { RiderService } from '../services/riderService';
         DriverPage,
         TabsPage
     ],
-    providers: [HttpClientWrapper, UserService, Geolocation, RiderService]
+    providers: [HttpClientWrapper, UserService, Geolocation, RiderService, GoogleMapsServiceWrapper]
 })
 export class AppModule { }

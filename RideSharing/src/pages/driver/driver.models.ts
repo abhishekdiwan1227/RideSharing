@@ -5,3 +5,8 @@ export class ActiveDriver {
     Name: string;
     Coordinates: Coordinates
 }
+
+export class IncomingRequest {
+    RiderName: string;
+    Destination: string;
+}

@@ -1,6 +1,7 @@
 ﻿import debug = require('debug');
 import express = require('express');
 import path = require('path');
+//var sse = require('./sse');
 
 import routes from './routes/index';
 import users from './routes/user';
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+//app.use(sse());
 
 app.use('/', routes);
 app.use('/users', users);

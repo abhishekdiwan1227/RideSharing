@@ -48,7 +48,9 @@ export class LoginPage {
                         driverUsername: res.json().username
                     });
                 } else {
-                    this.navCtrl.push(TabsPage);
+                    this.navCtrl.push(TabsPage, {
+                        riderUsername: res.json().username
+                    });
                 }
             }
         });

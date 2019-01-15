@@ -14,5 +14,9 @@
 <ion-content padding>
     <div *ngIf="isActive">
         <h4>Incoming Requests</h4>
+        <ion-item *ngFor="let request of incomingRequests">
+            {{request.RiderName}}- Destination:{{request.Destination}}
+            <button ion-button item-right (click)="gotoDestination()">Accept</button>
+        </ion-item>
     </div>
 </ion-content>
